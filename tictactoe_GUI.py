@@ -10,11 +10,8 @@ class tictactoe(object):
                 cmds.deleteUI('tictactoeWindow' , window=True)
         cmds.window('tictactoeWindow' , t='TIC TAC TOE GAME')
         cmds.columnLayout('menu' ,adjustableColumn = True,w=200)
-<<<<<<< HEAD
-=======
         cmds.text("txTurn",label="Turn: %s"%(self.turn))
         cmds.text("txPlay",label="player: O ",align='center') 
->>>>>>> fluke
         cmds.gridLayout( numberOfColumns=3, cellWidthHeight=(200,200) )
         cmds.iconTextButton("button1", image='blank.png',c=self.choosenum1)
         cmds.iconTextButton("button2", image='blank.png',c=self.choosenum2)
@@ -117,15 +114,10 @@ class tictactoe(object):
         self.mask =''
         if player%2 == 1:
             self.mask = 'O'
-<<<<<<< HEAD
-        else :
-            self.mask = 'X' 
-=======
             cmds.text("txPlay",e=True,label ="player : X ")
         else :
             self.mask = 'X' 
             cmds.text("txPlay",e=True,label ="player : O ")
->>>>>>> fluke
         if position == 1 and self.tictactoe[1] == '1':
             self.tictactoe[position] =self. mask
         elif position == 2 and self.tictactoe[2] == '2':
@@ -215,7 +207,6 @@ class tictactoe(object):
             cmds.window('winnerWindow',t="Result !!!",wh=(15,15))
             cmds.columnLayout('adjWin' ,adjustableColumn = True)
             cmds.text("winPlay",l="%s"%(self.x))
-            #cmds.button(label="close",c= cmds.deleteUI('winnerWindow',window=True))
             cmds.showWindow("winnerWindow")
         elif self.x == 'Tic Tac Toe is Draw' :
             print self.x
