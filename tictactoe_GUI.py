@@ -20,9 +20,14 @@ class tictactoe(object):
         cmds.iconTextButton("button7", image='blank.png',c=self.choosenum7)
         cmds.iconTextButton("button8", image='blank.png',c=self.choosenum8)
         cmds.iconTextButton("button9", image='blank.png',c=self.choosenum9)
-        cmds.button("tryAgian",l='Reset Match' , h = 50 ,p='menu', c = self.tictactoeWindow)
+        cmds.button("tryAgian",l='Reset Match' , h = 50 ,p='menu', c = self.resetMatch)
         cmds.showWindow('tictactoeWindow')
-                
+    def resetMatch(self,*args):
+        self.turn = 0
+        self.ix = 1
+        self.tictactoe = ['0','1','2','3','4','5','6','7','8','9']
+        self.tictactoeWindow()   
+        
     def choosenum1(self,*agrs):
         self.UI(1)
         if self.turn%2==0:
@@ -101,9 +106,9 @@ class tictactoe(object):
     def play_tictactoe(self,position,player):    
         self.mask =''
         if player%2 == 1:
-            self.mask = 'X'
+            self.mask = 'O'
         else :
-            self.mask = 'O' 
+            self.mask = 'X' 
         if position == 1 and self.tictactoe[1] == '1':
             self.tictactoe[position] =self. mask
         elif position == 2 and self.tictactoe[2] == '2':
