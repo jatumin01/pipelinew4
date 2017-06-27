@@ -5,10 +5,11 @@ class tictactoe(object):
         self.turn = 0
         self.ix = 1
         self.tictactoe = ['0','1','2','3','4','5','6','7','8','9']
-    def tictactoeWindow(self):    
+    def tictactoeWindow(self,*agrs):    
         if cmds.window('tictactoeWindow' , q=True, ex=True):
                 cmds.deleteUI('tictactoeWindow' , window=True)
         cmds.window('tictactoeWindow' , t='TIC TAC TOE GAME')
+        cmds.columnLayout('menu' ,adjustableColumn = True,w=200)
         cmds.gridLayout( numberOfColumns=3, cellWidthHeight=(200,200) )
         cmds.iconTextButton("button1", image='blank.png',c=self.choosenum1)
         cmds.iconTextButton("button2", image='blank.png',c=self.choosenum2)
@@ -19,6 +20,7 @@ class tictactoe(object):
         cmds.iconTextButton("button7", image='blank.png',c=self.choosenum7)
         cmds.iconTextButton("button8", image='blank.png',c=self.choosenum8)
         cmds.iconTextButton("button9", image='blank.png',c=self.choosenum9)
+        cmds.button("tryAgian",l='Reset Match' , h = 50 ,p='menu', c = self.tictactoeWindow)
         cmds.showWindow('tictactoeWindow')
                 
     def choosenum1(self,*agrs):
@@ -127,10 +129,28 @@ class tictactoe(object):
         self.i = self.checkwin()
         if self.i == 1 :
             self.i = 'Tic tac toe is Over \n Winner is player ' + self.mask
+            cmds.iconTextButton("button1",e=True,en=False)
+            cmds.iconTextButton("button2",e=True,en=False)
+            cmds.iconTextButton("button3",e=True,en=False)
+            cmds.iconTextButton("button4",e=True,en=False)
+            cmds.iconTextButton("button5",e=True,en=False)
+            cmds.iconTextButton("button6",e=True,en=False)
+            cmds.iconTextButton("button7",e=True,en=False)
+            cmds.iconTextButton("button8",e=True,en=False)
+            cmds.iconTextButton("button9",e=True,en=False)
         elif self.i == 0 :
             self.i = 'Tic tac Toe in Progress' 
         else :
             self.i = 'Tic Tac Toe is Draw' 
+            cmds.iconTextButton("button1",e=True,en=False)
+            cmds.iconTextButton("button2",e=True,en=False)
+            cmds.iconTextButton("button3",e=True,en=False)
+            cmds.iconTextButton("button4",e=True,en=False)
+            cmds.iconTextButton("button5",e=True,en=False)
+            cmds.iconTextButton("button6",e=True,en=False)
+            cmds.iconTextButton("button7",e=True,en=False)
+            cmds.iconTextButton("button8",e=True,en=False)
+            cmds.iconTextButton("button9",e=True,en=False)
         return self.i
             
     def show_state(self):
