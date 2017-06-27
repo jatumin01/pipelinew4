@@ -166,7 +166,7 @@ class tictactoe(object):
         return self.asset 
     
     def checkwin(self):
-        if self.tictactoe[1] == self.tictactoe[2] and self.tictactoe[2] == self.tictactoe[3]:
+        if   self.tictactoe[1] == self.tictactoe[2] and self.tictactoe[2] == self.tictactoe[3]:
             return 1
         elif self.tictactoe[4] == self.tictactoe[5] and self.tictactoe[5] == self.tictactoe[6]:
             return 1
