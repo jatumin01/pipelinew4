@@ -18,43 +18,32 @@ class tictactoe(object):
         cmds.button('button8',l='8',c=choosenum8)
         cmds.button('button9',l='9',c=choosenum9)
         cmds.showWindow('tictactoeWindow')
-        
+                
     def choosenum1(self,*agrs):
-        self.UI(1,self.ix)
-        self.ix+=1
-        print 1
+        self.UI(1)
+
     def choosenum2(self,*agrs):
-        self.UI(2,self.ix)
-        self.ix+=1
-        print 2
+        self.UI(2)
+
     def choosenum3(self,*agrs):
-        self.UI(3,self.ix)
-        self.ix+=1
-        print 3
+        self.UI(3)
+
     def choosenum4(self,*agrs):
-        self.UI(5,self.ix)
-        self.ix+=1
-        print 4
+        self.UI(5)
+
     def choosenum5(self,*agrs):
-        self.UI(6,self.ix)
-        self.ix+=1
-        print 5
+        self.UI(6)
+
     def choosenum6(self,*agrs):
-        self.UI(7,self.ix)
-        self.ix+=1
-        print 6
+        self.UI(7)
+
     def choosenum7(self,*agrs):
-        self.UI(8,self.ix)
-        self.ix+=1
-        print 7
+        self.UI(8)
+
     def choosenum8(self,*agrs):
-        self.UI(9,self.ix)
-        self.ix+=1
-        print 8
+        self.UI(9)
     def choosenum9(self,*agrs):
-        self.UI(10,ix)
-        self.ix+=1
-        print 9
+        self.UI(10)
         
     def play_tictactoe(self,position,player):    
         self.mask =''
@@ -123,9 +112,9 @@ class tictactoe(object):
             return 0
             
         
-    def UI(self,num,X):
+    def UI(self,num):
         self.pos = num
-        self.x = play_tictactoe(self.pos,X)
+        self.x = play_tictactoe(self.pos,self.ix)
         if self.x == ' Error input pls try agian':
             print self.x
         elif x =='Tic tac toe is Over \n Winner is player X' or  x =='Tic tac toe is Over \n Winner is player O' :
@@ -133,6 +122,7 @@ class tictactoe(object):
         elif x == 'Tic Tac Toe is Draw' :
             print self.x
         print self.x
+        self.ix+=1
 
 a = tictactoe()
 a.tictactoeWindow()
