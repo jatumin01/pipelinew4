@@ -1,3 +1,4 @@
+import random
 class CardGame(object):
     def __init__(self,Hero,Monster,Boss):
         super(CardGame,self).__init__()
@@ -17,22 +18,14 @@ class CardGame(object):
         
     def chooseCard(self):
         print 'You Have Card ' + str(self.cardHero)
-        while True:
-            self.hero.selectCard = input('Hero SelectCard')
-            if self.hero.selectCard == self.cardHero[0]:
-                self.cardHero[0]=self.cardHero[1]
-                self.cardHero[1]=self.cardHero[2]
-                break
-            elif self.hero.selectCard == self.cardHero[1]:
-                self.cardHero[1]=self.cardHero[2]
-                break
-            elif self.hero.selectCard == self.cardHero[2]:
-                break
-            else :
-                print 'Mistake Choose pls try Again'
-                
-        
-    
+        self.hero.selectCard = input('Hero SelectCard')
+        if self.hero.selectCard == self.cardHero[0]:
+            self.cardHero[0]=random.randint(0,3)
+        elif self.hero.selectCard == self.cardHero[1]:
+            self.cardHero[1]=random.randint(0,3)
+        elif self.hero.selectCard == self.cardHero[2]:
+            self.cardHero[2]=random.randint(0,3)           
+          
     def action(self):
         self.state = 1
         self.fineMonster = 1
@@ -42,6 +35,18 @@ class CardGame(object):
             self.turn = 1
             while self.hero.hp >0 and self.monsterType.hp >0 :
                 print '--------- Turn ' + str(self.turn) +' -------------'
+                self.count = 0
+                for x in self.cardHero :
+                    if x == 0 :
+                        cmds.iconTextButton("button%s"%(self.count), image='aHero.png')
+                    elif x == 1 :
+                        cmds.iconTextButton("button%s"%(self.count), image='dHero.png')
+                    elif x == 2 :
+                        cmds.iconTextButton("button%s"%(self.count), image='bHero.png')
+                    else :
+                        cmds.iconTextButton("button%s"%(self.count), image='heal.png')
+                    self.count+=1
+                
                 self.randomCard(self.monsterType)       
                 self.chooseCard()
                 print 'Hero SelectCard == ' + str(self.hero.selectCard) + '\nMonster SelectCard == ' + str(self.monsterType.selectCard)
@@ -123,7 +128,6 @@ class CardGame(object):
                 print self.monsterType.name + '  HP : ' + str(self.monsterType.hp)
                 self.turn+=1
                 
-                self.cardHero[2] = random.randint(0,3)
                                 
             if self.state == 1 :
                 if self.hero.hp <= 0 :
@@ -145,3 +149,31 @@ class CardGame(object):
                 print '--------- End Game ----------'
                 break
             
+    def GUI(self):
+
+        if cmds.window('cardGame' , q=True, ex=True):
+                cmds.deleteUI('a' , window=True)
+        cmds.window('cardGame' , t='Card Game')
+        cmds.columnLayout('menu' ,adjustableColumn = True,w=20,)
+        cmds.text("MHp", label = "Monster HP 150/150", height = 30, backgroundColor = [0.2, 0.2, 0.2],p='menu')
+        cmds.gridLayout( 'Monster',numberOfRowsColumns=(1,2), cellWidthHeight=(200,100),p='menu' )
+        cmds.iconTextButton( image='O.png',p='Monster')
+        cmds.iconTextButton( image='O.png',p='Monster')
+        cmds.text("event", label = "Start Game", height = 50, backgroundColor = [0.2, 0.2, 0.2],p='menu')
+        cmds.gridLayout( 'Hero',numberOfRowsColumns=(1,2), cellWidthHeight=(200,100),p='menu' )
+        cmds.iconTextButton('Hero Card',image='X.png',p='Hero')
+        cmds.iconTextButton( image='X.png',p='Hero')
+        cmds.text("HHp", label = "Hero HP 150/150", height = 30, backgroundColor = [0.2, 0.2, 0.2],p='menu')
+        cmds.gridLayout( 'name',numberOfRowsColumns=(1,3), cellWidthHeight=(200,200),p='menu' )
+        cmds.iconTextButton("button0", image='blank.png',c=buttonCard0)
+        cmds.iconTextButton("button1", image='blank.png',c=buttonCard1)
+        cmds.iconTextButton("button2", image='blank.png',c=buttonCard2)
+        cmds.button("tryAgian",l='Reset Match' , h = 50 ,p='menu')
+        cmds.showWindow('cardGame')
+
+    def buttonCard0(self):
+        if self.cardHero[x]
+    def buttonCard1(self):
+        self.chooseCard()
+    def buttonCard2(self):
+        self.chooseCard()

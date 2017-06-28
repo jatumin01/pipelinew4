@@ -1,4 +1,5 @@
-class Monster(Character):
+import pipelineGameCard.CG_ClassCharacter as m
+class Monster(m.Character):
     
    def __init__(self,name):
        super(Monster,self).__init__(name)

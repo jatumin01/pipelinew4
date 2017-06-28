@@ -1,14 +1,17 @@
 import sys
+import random
 if not "C:/Users/eur/Documents/Git/pipelinew4" in sys.path:
     sys.path.append("C:/Users/eur/Documents/Git/pipelinew4")
 
-import pipelineGameCard.CG_cardGame
-import pipelineGameCard.CG_GUI
+import pipelineGameCard.CG_cardGame as C
+import pipelineGameCard.CG_heroClass as H
+import pipelineGameCard.CG_monsterClass as M
+import pipelineGameCard.CG_GUI as G
 
-x= Hero('Hero')
-y= Monster('Monster')
-z= Monster('Boss')
-c= CardGame(x,y,z)
-
+x= H.Hero('Hero')
+y= M.Monster('Monster')
+z= M.Monster('Boss')
+c= C.CardGame(x,y,z)
+G.GUI()
 
 

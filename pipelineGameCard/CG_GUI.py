@@ -1,4 +1,5 @@
-def GUI(self,*agrs):    
+import maya.cmds as cmds
+def GUI():    
     if cmds.window('cardGame' , q=True, ex=True):
             cmds.deleteUI('a' , window=True)
     cmds.window('cardGame' , t='Card Game')
@@ -18,6 +19,7 @@ def GUI(self,*agrs):
     cmds.iconTextButton("button3", image='blank.png')
     cmds.button("tryAgian",l='Reset Match' , h = 50 ,p='menu')
     cmds.showWindow('cardGame')
+
 
 
 
