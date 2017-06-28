@@ -1,3 +1,4 @@
+import pipelineGameCard.CG_ClassCharacter
 class Hero(Character):
     
    def __init__(self,name):
