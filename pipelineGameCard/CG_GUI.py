@@ -57,19 +57,18 @@ class CardGame(object):
         
     def chooseCard(self):
         print 'You Have Card ' + str(self.cardHero)
-        while True:
-            self.hero.selectCard = input('Hero SelectCard')
-            if self.hero.selectCard == self.cardHero[0]:
-                self.cardHero[0]=self.cardHero[1]
-                self.cardHero[1]=self.cardHero[2]
-                break
-            elif self.hero.selectCard == self.cardHero[1]:
-                self.cardHero[1]=self.cardHero[2]
-                break
-            elif self.hero.selectCard == self.cardHero[2]:
-                break
-            else :
-                print 'Mistake Choose pls try Again'
+        self.hero.selectCard = input('Hero SelectCard')
+        if self.hero.selectCard == self.cardHero[0]:
+            self.cardHero[0]=random.randint(0,3)
+
+        elif self.hero.selectCard == self.cardHero[1]:
+            self.cardHero[1]=random.randint(0,3)
+
+        elif self.hero.selectCard == self.cardHero[2]:
+            self.cardHero[2]=random.randint(0,3)
+            
+        else :
+            print 'Mistake Choose pls try Again'
                 
         
     
@@ -163,7 +162,7 @@ class CardGame(object):
                 print self.monsterType.name + '  HP : ' + str(self.monsterType.hp)
                 self.turn+=1
                 
-                self.cardHero[2] = random.randint(0,3)
+                
                                 
             if self.state == 1 :
                 if self.hero.hp <= 0 :
