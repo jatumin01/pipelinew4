@@ -1,4 +1,3 @@
-import pipelineGameCard.CG_ClassCharacter
 class Monster(Character):
     
    def __init__(self,name):

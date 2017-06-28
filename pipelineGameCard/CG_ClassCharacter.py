@@ -8,6 +8,10 @@ class Character(object):
         self.hel = 0
         self.selectCard = 0
 
+import pipelineGameCard.CG_heroClass
+import pipelineGameCard.CG_monsterClass
+
+
         
         
 
