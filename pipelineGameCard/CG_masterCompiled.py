@@ -6,12 +6,12 @@ if not "C:/Users/eur/Documents/Git/pipelinew4" in sys.path:
 import pipelineGameCard.CG_cardGame as C
 import pipelineGameCard.CG_heroClass as H
 import pipelineGameCard.CG_monsterClass as M
-import pipelineGameCard.CG_GUI as G
+
 
 x= H.Hero('Hero')
 y= M.Monster('Monster')
 z= M.Monster('Boss')
 c= C.CardGame(x,y,z)
-G.GUI()
+C.GUI()
 
 
