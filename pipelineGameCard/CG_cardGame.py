@@ -168,7 +168,7 @@ class CardGame(object):
   
                 elif self.state == 2 :
                     cmds.text("MHp",e=True, label = "Boss HP %s/300"%(self.monsterType.hp))  
-                cmds.text("HHp",e=True, label = "Hero HP %s/300"%(self.hero.hp))
+                cmds.text("HHp",e=True, label = "Hero HP %s/300"%(self.hero.hp)) 
                 
                 self.checkHPbar()
                 self.turn+=1
@@ -184,7 +184,9 @@ class CardGame(object):
                 print '-------- Hero Win --------------'
                 print '-------- Next State (Boss) ----------'
                 self.monsterType = self.boss  
-                cmds.iconTextButton('Monsterss',e=True,image='charBoss.png')      
+                cmds.iconTextButton('Monsterss',e=True,image='charBoss.png')   
+                cmds.iconTextButton('cardMon',e=True,image='backCard.png') 
+                cmds.iconTextButton('cardHero',e=True,image='backCard.png')     
                 cmds.text("MHp",e=True, label = "Boss HP 300/300") 
         elif self.state == 2 :
             if self.hero.hp <= 0 :
