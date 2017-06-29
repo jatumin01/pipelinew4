@@ -4,12 +4,6 @@
 #                                #
 ##################################
 
-
-import sys
-import random
-if not "C:/Users/eur/Documents/Git/pipelinew4" in sys.path:
-    sys.path.append("C:/Users/eur/Documents/Git/pipelinew4")
-
 import pipelineGameCard.CG_ClassCharacter 
 import pipelineGameCard.CG_cardGame as C
 import pipelineGameCard.CG_heroClass as H
