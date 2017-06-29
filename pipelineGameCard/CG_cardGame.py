@@ -207,6 +207,7 @@ class CardGame(object):
             if self.hero.hp <= 0 :
                 cmds.text("event",e=True, label = 'Monster Win \n----------- End Game ------------ ' )
                 print '-------- Monster Win -----------'
+                self.end()
             elif self.monster.hp <= 0 :
                 self.state+=1
                 cmds.text("event",e=True, label = ' Hero Win  \n----------- Next State (Boss)  ------------ ' )
@@ -220,12 +221,22 @@ class CardGame(object):
                 cmds.text("event",e=True, label = ' Boss Win \n----------- End Game ------------ ' )
                 print '-------- Boss Win -----------'
                 print '--------- End Game ----------'
+                self.end()
             elif self.monsterType.hp <= 0 :
                 cmds.text("event",e=True, label = ' Hero Win  \n----------- End Game  ------------ ' )
                 print '-------- Hero Win --------------'
             
                 print '--------- End Game ----------'
-
+                self.end()
+    def end (self,*args):
+        cmds.iconTextButton( 'Monsterss',e=1,en=0)
+        cmds.iconTextButton("cardMon",e=1,en=0 )
+        cmds.iconTextButton('HeroChar',e=1,en=0)
+        cmds.iconTextButton("cardHero",e=1,en=0 )
+        cmds.iconTextButton("button0", e=1,en=0)
+        cmds.iconTextButton("button1",e=1,en=0 )
+        cmds.iconTextButton("button2",e=1,en=0 )
+                
     def rematch(self,*args):
         self.state = 1
         self.hero.hp = 300
@@ -246,7 +257,7 @@ class CardGame(object):
         cmds.iconTextButton("cardMon", image='backCard.png',p='Monster')
         cmds.text("event", label = "Start Game", height = 50, backgroundColor = [0.2, 0.2, 0.2],p='menu')
         cmds.gridLayout( 'Hero',numberOfRowsColumns=(1,2), cellWidthHeight=(200,150),p='menu' )
-        cmds.iconTextButton('Hero Card',image='charHero.png',p='Hero')
+        cmds.iconTextButton('HeroChar',image='charHero.png',p='Hero')
         cmds.iconTextButton("cardHero", image='backCard.png',p='Hero')
         cmds.text("HHp", label = "Hero HP 300/300", height = 30, backgroundColor = [0.2, 0.2, 0.2],p='menu')
         cmds.gridLayout( 'name',numberOfRowsColumns=(1,3), cellWidthHeight=(200,200),p='menu' )
