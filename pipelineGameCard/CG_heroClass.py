@@ -1,4 +1,5 @@
 import pipelineGameCard.CG_ClassCharacter as c
+reload (c)
 class Hero(c.Character):
     
    def __init__(self,name):

@@ -1,4 +1,5 @@
 import pipelineGameCard.CG_ClassCharacter as m
+reload(m)
 class Monster(m.Character):
     
    def __init__(self,name):

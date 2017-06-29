@@ -1,46 +1,5 @@
 import random
 import maya.cmds as cmds
-class Character(object):
-    def __init__(self,name):
-        self.name = name
-        self.hp = 0
-        self.atk = 0
-        self.deff = 0 
-        self.brk = 0
-        self.hel = 0
-        self.selectCard = 0
-
-
-class Hero(Character):
-    
-   def __init__(self,name):
-       super(Hero,self).__init__(name)
-       self.hp = 300
-       self.atk = 50
-       self.deff = 30
-       self.brk = 70
-       self.hel = 25
-
-       
-
-class Monster(Character):
-    
-   def __init__(self,name):
-       super(Monster,self).__init__(name)
-       if self.name == 'Boss':
-           self.hp = 300
-           self.atk = 40
-           self.deff = 30
-           self.brk = 50
-           self.hel = 25
-       else :
-           self.hp = 150
-           self.atk = 30
-           self.deff = 20
-           self.brk = 40
-           self.hel = 25
-
-
 class CardGame(object):
     def __init__(self,Hero,Monster,Boss):
         super(CardGame,self).__init__()
@@ -307,10 +266,4 @@ class CardGame(object):
         self.cardHero[2]=random.randint(0,3)
         self.action()
 
-
-x= Hero('Hero')
-y= Monster('Monster')
-z= Monster('Boss')
-c= CardGame(x,y,z)
-c.GUI()
 
