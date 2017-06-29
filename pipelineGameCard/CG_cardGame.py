@@ -11,12 +11,16 @@ class CardGame(object):
     
     def randomCard(self,x):
         x.selectCard = random.randint(0,3)
+        self.monsterName = 'Mons'
+        if self.state == 2 :
+            self.monsterName = 'Boss'
+
         if x.selectCard == 0 :
-            cmds.iconTextButton("cardMon",e=True, image='aMons.png')
+            cmds.iconTextButton("cardMon",e=True, image='a%s.png'%(self.monsterName))
         elif x.selectCard == 1 :
-            cmds.iconTextButton("cardMon",e=True, image='dMons.png')
+            cmds.iconTextButton("cardMon",e=True, image='d%s.png'%(self.monsterName))
         elif x.selectCard == 2 :
-            cmds.iconTextButton("cardMon",e=True, image='bMons.png')
+            cmds.iconTextButton("cardMon",e=True, image='b%s.png'%(self.monsterName))
         else :
             cmds.iconTextButton("cardMon",e=True, image='heal.png')
     
@@ -147,19 +151,26 @@ class CardGame(object):
                     cmds.text("event",e=True,label ='Hero Heal : ' +str(self.hero.hel) +'\n'+self.monsterType.name + ' Heal : ' +str(self.monsterType.hel)) 
                     print 'Hero Heal : ' +str(self.hero.hel)
                     print self.monsterType.name + ' Heal : ' +str(self.monsterType.hel)
-                if self.state == 1:
-                    cmds.text("MHp",e=True, label = "Monster HP %s/150"%(self.monsterType.hp))   
-                elif self.state == 2 :
-                    cmds.text("MHp",e=True, label = "Boss HP %s/300"%(self.monsterType.hp))  
-                cmds.text("HHp",e=True, label = "Hero HP %s/300"%(self.hero.hp))   
+
                 if self.hero.hp > 300 :
                     self.hero.hp = 300
                 if self.monster.hp > 150 :
                     self.monsterType.hp = 150
                 if self.boss.hp > 300 :
                     self.boss.hp = 300
+
                 print self.hero.name + ' HP : ' + str(self.hero.hp)
                 print self.monsterType.name + '  HP : ' + str(self.monsterType.hp)
+
+
+                if self.state == 1:
+                    cmds.text("MHp",e=True, label = "Monster HP %s/150"%(self.monsterType.hp))
+  
+                elif self.state == 2 :
+                    cmds.text("MHp",e=True, label = "Boss HP %s/300"%(self.monsterType.hp))  
+                cmds.text("HHp",e=True, label = "Hero HP %s/300"%(self.hero.hp))
+                
+                self.checkHPbar()
                 self.turn+=1
                 
         if self.state == 1 :
@@ -187,15 +198,43 @@ class CardGame(object):
             
                 print '--------- End Game ----------'
                 self.end()
+
     def end (self,*args):
-        cmds.iconTextButton( 'Monsterss',e=1,en=0)
-        cmds.iconTextButton("cardMon",e=1,en=0 )
-        cmds.iconTextButton('HeroChar',e=1,en=0)
-        cmds.iconTextButton("cardHero",e=1,en=0 )
-        cmds.iconTextButton("button0", e=1,en=0)
-        cmds.iconTextButton("button1",e=1,en=0 )
-        cmds.iconTextButton("button2",e=1,en=0 )
-                
+        cmds.columnLayout('menu',e=True, backgroundColor =[0.4, 0.4, 0.4])
+        cmds.iconTextButton( 'Monsterss',e=1,en=0,backgroundColor = [0.4, 0.4, 0.4])
+        cmds.iconTextButton("cardMon",e=1,en=0,backgroundColor = [0.4, 0.4, 0.4]) 
+        cmds.iconTextButton('HeroChar',e=1,en=0,backgroundColor = [0.4, 0.4, 0.4])
+        cmds.iconTextButton("cardHero",e=1,en=0 ,backgroundColor = [0.4, 0.4, 0.4])
+        cmds.iconTextButton("button0", e=1,en=0,backgroundColor = [0.4, 0.4, 0.4])
+        cmds.iconTextButton("button1",e=1,en=0 ,backgroundColor = [0.4, 0.4, 0.4])
+        cmds.iconTextButton("button2",e=1,en=0 ,backgroundColor = [0.4, 0.4, 0.4])
+
+    def checkHPbar(self):
+
+        if self.hero.hp <= 0 :
+            self.hero.hp = 0
+        if self.monster.hp <= 0 :
+           self.monster.hp = 0
+        if self.boss.hp <= 0 :
+          self.boss.hp = 0
+
+        if self.state == 1 :
+            if self.monster.hp == 0 :
+                cmds.button('mhpBar',e=True,w=self.boss.hp*2)
+            elif self.monster.hp > 0 :
+                cmds.button('mhpBar',e=True,w=self.monster.hp*4)
+        elif self.state == 2 :
+            if self.boss.hp == 0 :
+                cmds.button('mhpBar',e=True,w=600 ,backgroundColor = [0.1, 0.1, 0.1])
+            else :
+                cmds.button('mhpBar',e=True,w=self.boss.hp*2)
+
+        if self.hero.hp == 0 :
+            cmds.button('hhpBar',e=True,w=600 ,backgroundColor = [0.1, 0.1, 0.1])
+        else :
+            cmds.button('hhpBar',e=True,w=self.hero.hp*2)
+
+
     def rematch(self,*args):
         self.state = 1
         self.hero.hp = 300
@@ -209,21 +248,23 @@ class CardGame(object):
         if cmds.window('cardGame' , q=True, ex=True):
                 cmds.deleteUI('cardGame' , window=True)
         cmds.window('cardGame' , t='Card Game')
-        cmds.columnLayout('menu' ,adjustableColumn = True,w=20,)
-        cmds.text("MHp", label = "Monster HP 150/150", height = 30, backgroundColor = [0.2, 0.2, 0.2],p='menu')
+        cmds.columnLayout('menu' ,w=20)
+        cmds.button('mhpBar', backgroundColor = [0, 255, 0 ],w=600)
+        cmds.text("MHp", label = "Monster HP 150/150", height = 30, backgroundColor = [0.2, 0.2, 0.2],p='menu',w=600)
         cmds.gridLayout( 'Monster',numberOfRowsColumns=(1,2), cellWidthHeight=(200,150),p='menu' )
         cmds.iconTextButton( 'Monsterss',image='charMons.png',p='Monster')
         cmds.iconTextButton("cardMon", image='backCard.png',p='Monster')
-        cmds.text("event", label = "Start Game", height = 50, backgroundColor = [0.2, 0.2, 0.2],p='menu')
+        cmds.text("event", label = "Start Game", height = 50, backgroundColor = [0.2, 0.2, 0.2],p='menu',w=600)
         cmds.gridLayout( 'Hero',numberOfRowsColumns=(1,2), cellWidthHeight=(200,150),p='menu' )
         cmds.iconTextButton('HeroChar',image='charHero.png',p='Hero')
         cmds.iconTextButton("cardHero", image='backCard.png',p='Hero')
-        cmds.text("HHp", label = "Hero HP 300/300", height = 30, backgroundColor = [0.2, 0.2, 0.2],p='menu')
+        cmds.text("HHp", label = "Hero HP 300/300", height = 30, backgroundColor = [0.2, 0.2, 0.2],p='menu',w=600)
+        cmds.button('hhpBar', backgroundColor = [0, 255, 0 ],w=600,p='menu')
         cmds.gridLayout( 'name',numberOfRowsColumns=(1,3), cellWidthHeight=(200,200),p='menu' )
         cmds.iconTextButton("button0", image='backCard.png',c=self.buttonCard0)
         cmds.iconTextButton("button1", image='backCard.png',c=self.buttonCard1)
         cmds.iconTextButton("button2", image='backCard.png',c=self.buttonCard2)
-        cmds.button("tryAgian",l='Reset Match' , h = 50 ,p='menu',c=self.rematch)
+        cmds.button("tryAgian",l='Reset Match' , h = 50 ,p='menu',c=self.rematch,w=600)
         cmds.showWindow('cardGame')
         self.state = 1
         self.turn = 1
