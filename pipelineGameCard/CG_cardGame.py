@@ -218,21 +218,41 @@ class CardGame(object):
         if self.boss.hp <= 0 :
           self.boss.hp = 0
 
+        self.rHero = 0.00
+        self.gHero = 0.00
+        self.rMonster = 0.00
+        self.gMonster = 0.00
+        self.rBoss = 0.00
+        self.gBoss = 0.00
+        self.Hpercent = self.hero.hp*100 /300.00
+        self.Mpercent = (self.monster.hp/150.00) * 100.00
+        self.Bpercent = (self.boss.hp/300.00) * 100.00
+
+        self.gHero = self.Hpercent*1.00 /100.00
+        self.rHero = 1.00 - self.gHero 
+        self.gMonster = (self.Mpercent/100.00) * 1.00
+        self.rMonster = 1.00 - self.gMonster 
+        self.gBoss = (self.Bpercent/100.00) * 1.00
+        self.rBoss = 1.00 - self.gBoss 
+        print self.gMonster
+        print self.rMonster
+        print self.Mpercent
+
         if self.state == 1 :
             if self.monster.hp == 0 :
-                cmds.button('mhpBar',e=True,w=self.boss.hp*2)
+                cmds.button('mhpBar',e=True,w=self.boss.hp*2,backgroundColor =[self.rBoss, self.gBoss ,0])
             elif self.monster.hp > 0 :
-                cmds.button('mhpBar',e=True,w=self.monster.hp*4)
+                cmds.button('mhpBar',e=True,w=self.monster.hp*4,backgroundColor = [self.rMonster, self.gMonster,0])
         elif self.state == 2 :
             if self.boss.hp == 0 :
                 cmds.button('mhpBar',e=True,w=600 ,backgroundColor = [0.1, 0.1, 0.1])
             else :
-                cmds.button('mhpBar',e=True,w=self.boss.hp*2)
+                cmds.button('mhpBar',e=True,w=self.boss.hp*2,backgroundColor = [self.rBoss, self.gBoss ,0])
 
         if self.hero.hp == 0 :
             cmds.button('hhpBar',e=True,w=600 ,backgroundColor = [0.1, 0.1, 0.1])
         else :
-            cmds.button('hhpBar',e=True,w=self.hero.hp*2)
+            cmds.button('hhpBar',e=True,w=self.hero.hp*2,backgroundColor = [self.rHero, self.gHero ,0])
 
 
     def rematch(self,*args):
